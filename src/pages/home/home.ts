@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,44 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public alertCtrl: AlertController,
+    public navCtrl: NavController) {
 
   }
-
+showAlert1(){
+  const alert = this.alertCtrl.create({
+    title: 'แจ้งเตือนการใช้งาน',
+    subTitle: 'ของระบบ',
+    buttons: ['ok']
+ });
+ alert.present();
+}
+showAlert2(){
+  const alert = this.alertCtrl.create({
+    title: 'โปรดใส่รหัสผ่านที่สมัครไว้',
+    message:"TEXT MESSAGE",
+    subTitle: 'จำนวน 6 ตัวขึ้นไป',
+    inputs: [
+      {
+        name:'Login',
+        placeholder: '******'
+      }
+    ],
+    buttons:[
+      {
+        text: 'ยกเลิก',
+        handler: () => {
+          console.log('ยกเลิกแล้ว');
+        }
+       },
+      {
+          text: 'บันทึก',
+          handler: () => {
+            console.log('บันทึกแล้ว');
+            }
+         }
+        ]
+ });
+ alert.present();
+  }
 }
